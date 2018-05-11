@@ -2,7 +2,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
@@ -18,6 +19,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import IndexReducer from './index-reducer';
 import IndexSagas from './index-sagas';
 
+// Import history for router
+import history from './history';
+
 // Setup the middleware to watch between the Reducers and the Actions
 const sagaMiddleware = createSagaMiddleware();
 
@@ -32,7 +36,7 @@ sagaMiddleware.run(IndexSagas);
 // Setup the top level router component for our React Router
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <App>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />

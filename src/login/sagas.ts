@@ -1,9 +1,7 @@
 import { call, cancel, cancelled, fork, put, take } from 'redux-saga/effects';
 
-// We'll use this function to redirect to different routes based on cases
-// https://github.com/ReactTraining/react-router/blob/master/FAQ.md
-// #how-do-i-access-the-history-object-outside-of-components
-// import { browserHistory } from 'react-router-dom';
+// We'll use the history object to redirect to different routes based on cases
+import history from '../history';
 
 // Helper for api errors
 import { handleApiErrors } from '../lib/api-errors';
@@ -39,7 +37,7 @@ function* logout() {
   localStorage.removeItem('token');
 
   // redirect to the /login screen
-  // browserHistory.push('/login');
+  history.push('/login');
 }
 
 function* loginFlow(email: string, password: string) {
@@ -60,7 +58,7 @@ function* loginFlow(email: string, password: string) {
     localStorage.setItem('token', JSON.stringify(token)); // sketch?
 
     // redirect them to WIDGETS!
-    // browserHistory.push('/widgets')
+    history.push('/widgets');
   } catch (error) {
     // error? send it to redux
     yield put({ type: LoginActionType.LOGIN_ERROR, error });
@@ -68,7 +66,7 @@ function* loginFlow(email: string, password: string) {
     // No matter what, if our `forked` `task` was cancelled
     // we will then just redirect them to login
     if (yield cancelled()) {
-      // browserHistory.push('/login') // somehow do the redirect
+      history.push('/login');
     }
   }
 
