@@ -11,3 +11,8 @@ declare type ActionWithPayload<T extends string, P> = Action<T> & P;
 declare interface Token {
   userId: string;
 }
+
+declare interface Message {
+  time: number;
+  body: string;
+}

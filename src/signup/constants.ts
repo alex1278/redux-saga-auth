@@ -16,6 +16,6 @@ export type SignupAction = SignupRequestAction;
 export interface SignupState {
   requesting: boolean;
   successful: boolean;
-  messages: string[]; // ?
-  errors: string[]; // ?
+  messages: Message[];
+  errors: Message[];
 }
