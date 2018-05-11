@@ -29,4 +29,4 @@ const App = () => (
 
 
 
-export default restricted(checkIndexAuthorization, '/widgets')(App);
+export default restricted(checkIndexAuthorization, '/widgets', '/login')(App);
