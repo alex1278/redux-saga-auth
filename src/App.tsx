@@ -14,30 +14,21 @@ import logo from './logo.svg';
 
 // import { checkIndexAuthorization } from './lib/check-auth';
 
-class App extends React.Component<DispatchProp> {
-
-  componentDidMount() {
-    // checkIndexAuthorization(this.props);
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to Widget Reactory</h2>
-        </header>
-        <section className="App-body">
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/widgets" component={Widgets} />
-          </Switch>
-        </section>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <h2>Welcome to Widget Reactory</h2>
+    </header>
+    <section className="App-body">
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/widgets" component={Widgets} />
+      </Switch>
+    </section>
+  </div>
+);
 
 
 
