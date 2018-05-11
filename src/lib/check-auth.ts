@@ -37,6 +37,7 @@ export function checkAuthorization() {
 }
 
 export async function checkIndexAuthorization(): Promise<boolean> {
+  console.log('starting index auth');
 
   // If we pass the authentication check we are OVERLY authed for index
   // If we don't have authentication, we can continue to an index (login) page
@@ -49,7 +50,7 @@ export async function checkIndexAuthorization(): Promise<boolean> {
 }
 
 export async function checkWidgetAuthorization(): Promise<boolean> {
-
+  console.log('starting widget auth');
   try {
     // reference to the `client` piece of state
     // Ideally get this from props?
@@ -58,12 +59,15 @@ export async function checkWidgetAuthorization(): Promise<boolean> {
     // is it defined and does it have a token? good, go ahead to widgets
     // Ideally we would check this with the backend
     if (client && client.token) {
+      console.log('found the token', client.token);
       return true;
     }
 
     // not set yet?  Let's try and set it and if so, go ahead to widgets
+    console.log('no token, checking auth');
     return await checkAuthorization();
   } catch (error) {
+    console.error(error);
     return false;
   }
 }
