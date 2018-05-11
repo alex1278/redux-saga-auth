@@ -7,7 +7,7 @@ const Errors = (props: { errors: Message[], message: string }) => {
   return (<div>
     <h4>{message}</h4>
     <ul>
-      {errors.map(({ time, body }) => (<li key={time}>{body}</li>))}
+      {errors.map(({ time, body }) => (<li key={time.valueOf()}>{body}</li>))}
     </ul>
   </div>
   );

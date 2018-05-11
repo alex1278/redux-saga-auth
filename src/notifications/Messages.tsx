@@ -6,7 +6,7 @@ const Messages = (props: { messages: Message[] }) => {
   const { messages } = props;
   return (<div>
     <ul>
-      {messages.map(({ time, body }) => (<li key={time}>{body}</li>))}
+      {messages.map(({ time, body }) => (<li key={time.valueOf()}>{body}</li>))}
     </ul>
   </div>
   );

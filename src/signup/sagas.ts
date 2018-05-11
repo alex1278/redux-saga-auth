@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import {handleApiErrors} from '../lib/api-errors';
-import { SignupActionType, SignupRequestAction } from './constants';
+import { handleApiErrors } from '../lib/api-errors';
+import { SignupActionType, SignupRequestAction, SignupResponse } from './constants';
 
 // The url derived from our .env file
 const signupUrl = `${process.env.REACT_APP_API_URL}/api/Clients`;
 
-function signupApi(email: string, password: string) {
+function signupApi(email: string, password: string): Promise<SignupResponse> {
   // call to the "fetch".  this is a "native" function for browsers
   // that's conveniently polyfilled in create-react-app if not available
   return fetch(signupUrl, {
@@ -30,7 +30,7 @@ function* signupFlow(action: SignupRequestAction) {
     // pulls "calls" to our signupApi with our email and password
     // from our dispatched signup action, and will PAUSE
     // here until the API async function, is complete!
-    const signupResponse = yield call(signupApi, email, password);
+    const signupResponse: SignupResponse = yield call(signupApi, email, password);
 
     // when the above api call has completed it will "put",
     // or dispatch, an action of type SIGNUP_SUCCESS with
