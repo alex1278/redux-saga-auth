@@ -1,14 +1,14 @@
-import { CLIENT_SET, CLIENT_UNSET } from './constants';
+import { ClientActionType, ClientSetAction, ClientUnsetAction } from './constants';
 
-export function setClient (token: string) {
+export function setClient(token: Token): ClientSetAction {
   return {
-    type: CLIENT_SET,
+    type: ClientActionType.CLIENT_SET,
     token,
   };
 }
 
-export function unsetClient () {
+export function unsetClient(): ClientUnsetAction {
   return {
-    type: CLIENT_UNSET,
+    type: ClientActionType.CLIENT_UNSET,
   };
 }

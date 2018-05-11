@@ -2,7 +2,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
@@ -27,18 +27,18 @@ const store = createStore(
 );
 
 // Begin our Index Saga
-sagaMiddleware.run(IndexSagas)
+sagaMiddleware.run(IndexSagas);
 
 // Setup the top level router component for our React Router
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Route path="/" component={App} >
+    <Router>
+      <App>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/widgets" component={Widgets} />
-      </Route>
-    </BrowserRouter>
+      </App>
+    </Router>
   </Provider>,
   document.getElementById('root'),
-)
+);

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 import './App.css';
 
 import logo from './logo.svg';
 
 // TODO: type this
-const App = (props: { children?: ReactElement<any> }) => {
+const App = (props: { children?: ReactNode }) => {
   return (
     <div className="App">
       <header className="App-header">

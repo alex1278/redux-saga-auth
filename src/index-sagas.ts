@@ -1,4 +1,5 @@
-// index-sagas.ts
+import { all } from 'redux-saga/effects';
+
 export default function* IndexSaga () {
-  yield [];
+  yield all([]);
 }
