@@ -9,6 +9,10 @@
   "rules": {
     "semicolon": [true, "always"],
     "object-literal-sort-keys": false,
-    "interface-name": false
+    "interface-name": false,
+    "member-access": [true, "no-public"],
+    "no-console": {
+      "severity": "warning"
+    }
   }
 }
