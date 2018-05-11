@@ -1,5 +1,5 @@
 // index-reducer.ts
-import { combineReducers } from 'redux';
+import { combineReducers, Store } from 'redux';
 import { FormStateMap, reducer as form } from 'redux-form';
 import { ClientState } from './client/constants';
 import client from './client/reducer';
@@ -14,6 +14,8 @@ export interface RootState {
   login: LoginState;
   forms: FormStateMap; // ?
 }
+
+export type RootStore = Store<RootState>;
 
 const IndexReducer = combineReducers<RootState>({
   client,

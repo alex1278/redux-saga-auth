@@ -2,8 +2,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
-import { IndexAuthRoute } from './auth-routes/IndexAuthRoute';
+import { Route, Router } from 'react-router-dom';
 
 // Import all of our components
 import App from './App';
@@ -19,7 +18,7 @@ import store from './store';
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <IndexAuthRoute exact={true} path='/' component={App}/>
+      <Route path='/' component={App}/>
     </Router>
   </Provider>,
   document.getElementById('root'),
