@@ -9,12 +9,12 @@ import Widgets from './widgets';
 
 import logo from './logo.svg';
 
-import { checkIndexAuthorization } from './lib/check-auth';
+// import { checkIndexAuthorization } from './lib/check-auth';
 
 class App extends React.Component<DispatchProp> {
 
   componentDidMount() {
-    checkIndexAuthorization(this.props);
+    // checkIndexAuthorization(this.props);
   }
 
   render() {
