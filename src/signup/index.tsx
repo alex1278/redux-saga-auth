@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { RootState } from '../index-reducer';
 import signupRequest from './actions';
 
@@ -8,7 +8,33 @@ import signupRequest from './actions';
 // If trouble, see https://spin.atomicobject.com/2017/04/20/typesafe-container-components/
 class Signup extends React.Component<InjectedFormProps> {
   render() {
-    return <div>Signup</div>;
+    return (
+      <div className="signup">
+        <form className="widget-form">
+          <h1>Signup</h1>
+          <label htmlFor="email">Email</label>
+          <Field
+            name="email"
+            type="text"
+            id="email"
+            className="email"
+            label="Email"
+            component="input"
+          />
+          <label htmlFor="password">Password</label>
+          <Field
+            name="password"
+            type="password"
+            id="password"
+            className="password"
+            label="Password"
+            component="input"
+          />
+          {/* Originally was `action="submit"` may need to change back for Redux  */}
+          <button type="submit">SIGNUP</button>
+        </form>
+      </div>
+    );
   }
 }
 
