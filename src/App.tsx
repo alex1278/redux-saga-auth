@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { connect, DispatchProp } from 'react-redux';
+import { DispatchProp } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 import Login from './login';
 import Signup from './signup';
 import Widgets from './widgets';
+
+import { restricted } from './auth/restricted';
+import { checkAuthorization } from './lib/check-auth';
 
 import logo from './logo.svg';
 
@@ -36,4 +39,6 @@ class App extends React.Component<DispatchProp> {
   }
 }
 
-export default connect()(App);
+
+
+export default restricted(checkAuthorization)(App);
