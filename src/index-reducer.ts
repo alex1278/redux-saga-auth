@@ -15,7 +15,7 @@ export interface RootState {
   forms: FormStateMap; // ?
 }
 
-const IndexReducer = combineReducers({
+const IndexReducer = combineReducers<RootState>({
   client,
   signup,
   login,
