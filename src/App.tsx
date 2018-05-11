@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { DispatchProp } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
@@ -8,11 +7,9 @@ import Signup from './signup';
 import Widgets from './widgets';
 
 import { restricted } from './auth/restricted';
-import { checkAuthorization } from './lib/check-auth';
+import { checkIndexAuthorization } from './lib/check-auth';
 
 import logo from './logo.svg';
-
-// import { checkIndexAuthorization } from './lib/check-auth';
 
 const App = () => (
   <div className="App">
@@ -32,4 +29,4 @@ const App = () => (
 
 
 
-export default restricted(checkAuthorization)(App);
+export default restricted(checkIndexAuthorization, '/widgets')(App);

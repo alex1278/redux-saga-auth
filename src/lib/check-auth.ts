@@ -1,6 +1,5 @@
 // import history from '../history';
 import { setClient } from '../client/actions';
-import { RootStore } from '../index-reducer';
 import store from '../store';
 
 export function checkAuthorization() {
@@ -37,55 +36,34 @@ export function checkAuthorization() {
   });
 }
 
-export function checkIndexAuthorization({ dispatch }: RootStore) {
-  // by having a function that returns a function we satisfy 2 goals:
-  //
-  // 1. grab access to our Redux Store and thus Dispatch to call actions
-  // 2. Return a function that includes all the proper .. properties that
-  //    React Router expects for us to include and use
-  //
-  // `nextState` - the next "route" we're navigating to in the router
-  // `replace` - a helper to change the route
-  // `next` - what we call when we're done messing around
-  //
-  return (nextState: string, replace: (route: string) => void, next: () => void) => {
-    // we'll make this in a minute - remember begin with the end!
-    // If we pass the authentication check, go to widgets
-    if (checkAuthorization()) {
-      // replace('widgets'); // maybe replace with history.push?
+export async function checkIndexAuthorization(): Promise<boolean> {
 
-      return next();
-    }
-
-    // Otherwise let's take them to login!
-    // replace('login');// maybe replace with history.push?
-    return next();
-  };
+  // If we pass the authentication check we are OVERLY authed for index
+  // If we don't have authentication, we can continue to an index (login) page
+  try {
+    const alreadyAuthed = await checkAuthorization();
+    return !alreadyAuthed;
+  } catch (error) {
+    return true;
+  }
 }
 
-export function checkWidgetAuthorization() {
-  // Same format - we do this to have the Redux State available.
-  // The difference is that this time we also pull in the helper
-  // `getState` which will allow us to.....
-  // ....
-  // get the state.
-  //
-  return (nextState: string, replace: (route: string) => void, next: () => void) => {
+export async function checkWidgetAuthorization(): Promise<boolean> {
+
+  try {
     // reference to the `client` piece of state
+    // Ideally get this from props?
     const client = store.getState().client;
 
     // is it defined and does it have a token? good, go ahead to widgets
+    // Ideally we would check this with the backend
     if (client && client.token) {
-      return next();
+      return true;
     }
 
     // not set yet?  Let's try and set it and if so, go ahead to widgets
-    if (checkAuthorization()) {
-      return next();
-    }
-
-    // nope?  okay back to login ya go.
-    // replace('login');// maybe replace with history.push?
-    return next();
-  };
+    return await checkAuthorization();
+  } catch (error) {
+    return false;
+  }
 }
